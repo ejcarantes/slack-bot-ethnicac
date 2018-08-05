@@ -33,7 +33,6 @@ def slack(request):
         chal = request_body['challenge']
     else:
         chal = "No challenge"
-    print (chal)
-    return ""
+    return HttpResponse(chal,content_type="text/plain")
 
 
