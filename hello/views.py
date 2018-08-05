@@ -1,5 +1,7 @@
 
 import json
+import os
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -25,7 +27,13 @@ def db(request):
 @csrf_exempt
 def slack(request):
     request_body = json.loads(request.body)
-    print (request_body)
+    url_token = request_body['token']
+
+    if os.environ.get("ver_token") == url_token:
+        chal = request_body['challenge']
+    else:
+        chal = "No challenge"
+    print (chal)
     return ""
 
 
