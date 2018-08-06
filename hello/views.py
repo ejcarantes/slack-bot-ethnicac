@@ -7,8 +7,8 @@ from slackclient import SlackClient
 from django.views.decorators.csrf import csrf_exempt
 from tweepy import OAuthHandler, API
 
-SLACK_API_TOKEN = environ.get('SLACK_API_TOKEN', None)
-SLACK_BOT_TOKEN = environ.get('SLACK_BOT_TOKEN', None)
+SLACK_API_TOKEN = environ.get('oAuth_token', None)
+SLACK_BOT_TOKEN = environ.get('bot_auth_token', None)
 slackC = SlackClient(SLACK_API_TOKEN)
 slackBot = SlackClient(SLACK_BOT_TOKEN)
 
@@ -40,7 +40,7 @@ def get_channel(request):
     chal = channel_event['event']['channel']
     text = channel_event['event']['text']
     if "trending" in text or "twitter" in text:
-        slackC.api_call(
+        slackBot.api_call(
             "chat.postMessage",
             channel=chal,
             text=twittertrends(),
