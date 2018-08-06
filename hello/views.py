@@ -3,7 +3,7 @@ import os
 from os import environ
 from slackclient import SlackClient
 from django.views.decorators.csrf import csrf_exempt
-import tweepy
+from tweepy import OAuthHandler, API
 
 SLACK_API_TOKEN = environ.get('SLACK_API_TOKEN', None)
 SLACK_BOT_TOKEN = environ.get('SLACK_BOT_TOKEN', None)
@@ -60,9 +60,9 @@ def slack(request):
 
     if os.environ.get("ver_token") == url_token:
        # chal = request_body['challenge']
-        get_channel(request);
+        get_channel(request)
     else:
-        print "no token"
+        print("no token")
         #chal = "No challenge key"
     # return HttpResponse(chal,content_type="text/plain")
     return request
