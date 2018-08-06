@@ -9,20 +9,18 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import Greeting
 
-# Create your views here.
-def index(request):
-    # return HttpResponse('Hello from Python!')
-    return render(request, 'index.html')
+# Create your views here
 
-
-def db(request):
-
-    greeting = Greeting()
-    greeting.save()
-
-    greetings = Greeting.objects.all()
-
-    return render(request, 'db.html', {'greetings': greetings})
+def get_channel(request):
+    channel_event= json.loads(request.body)
+    #text_event= json.loads(request.body)
+    url_token = channel_event['token']
+    if os.environ.get("ver_token") == url_token:
+        chal = channel_event['event']['challenge']
+        text = channel_event['event']['text']
+    else:
+        chal = "No challenge key"
+        text = "No text found"
 
 @csrf_exempt
 def slack(request):
@@ -30,9 +28,10 @@ def slack(request):
     url_token = request_body['token']
 
     if os.environ.get("ver_token") == url_token:
-        chal = request_body['challenge']
+       # chal = request_body['challenge']
+        get_channel(request);
     else:
-        chal = "No challenge"
+        #chal = "No challenge key"
     return HttpResponse(chal,content_type="text/plain")
 
 
