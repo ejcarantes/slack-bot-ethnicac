@@ -40,7 +40,7 @@ def get_channel(request):
     chal = channel_event['event']['channel']
     text = channel_event['event']['text']
     if "trending" in text or "twitter" in text:
-        slackBot.api_call(
+        slackC.api_call(
             "chat.postMessage",
             channel=chal,
             text=twittertrends(),
