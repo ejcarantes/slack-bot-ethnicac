@@ -11,8 +11,8 @@ from .models import Greeting
 
 SLACK_API_TOKEN = environ.get('SLACK_API_TOKEN', None)
 SLACK_BOT_TOKEN = environ.get('SLACK_BOT_TOKEN', None)
-sc = SlackClient(SLACK_API_TOKEN)
-bot = SlackClient(SLACK_BOT_TOKEN)
+slackC = SlackClient(SLACK_API_TOKEN)
+slackBot = SlackClient(SLACK_BOT_TOKEN)
 
 consumer_key = environ.get('consumer_key', None)
 consumer_secret = environ.get('consumer_secret', None)
@@ -29,9 +29,16 @@ def get_channel(request):
     channel_event= json.loads(request.body)
     #text_event= json.loads(request.body)
     url_token = channel_event['token']
-    if os.environ.get("ver_token") == url_token:
-        chal = channel_event['event']['challenge']
-        text = channel_event['event']['text']
+    chal = channel_event['event']['challenge']
+    text = channel_event['event']['text']
+    if "trending" in text or "twitter" in text :
+        slackC.api_call(
+            "chat.postMessage",
+            channel=channel,
+            text=text,
+            icon_emoji=':robot_face:'
+
+        )
     else:
         chal = "No challenge key"
         text = "No text found"
