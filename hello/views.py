@@ -35,7 +35,7 @@ def twittertrends():
 def get_channel(request):
     channel_event= json.loads(request.body)
     #text_event= json.loads(request.body)
-    chal = channel_event['event']['challenge']
+    chal = channel_event['event']['channel']
     text = channel_event['event']['text']
     if "trending" in text or "twitter" in text :
         slackC.api_call(
