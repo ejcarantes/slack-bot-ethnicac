@@ -1,6 +1,8 @@
 import json
 import os
 from os import environ
+
+from django.http import HttpResponse
 from slackclient import SlackClient
 from django.views.decorators.csrf import csrf_exempt
 from tweepy import OAuthHandler, API
@@ -33,7 +35,7 @@ def twittertrends():
 
 # Create your views here
 def get_channel(request):
-    channel_event= json.loads(request.body)
+    channel_event = json.loads(request.body)
     #text_event= json.loads(request.body)
     chal = channel_event['event']['channel']
     text = channel_event['event']['text']
@@ -45,7 +47,7 @@ def get_channel(request):
             icon_emoji=':robot_face:'
         )
     else:
-        slackC.api_call(
+        slackBot.api_call(
             "chat.postMessage",
             channel=chal,
             text="No text found",
@@ -64,7 +66,7 @@ def slack(request):
     else:
         print("no token")
         #chal = "No challenge key"
-    # return HttpResponse(chal,content_type="text/plain")
-    return request
+    return HttpResponse(request)
+    # return request
 
 
