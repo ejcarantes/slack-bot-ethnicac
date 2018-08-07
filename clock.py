@@ -15,17 +15,17 @@ def timed_job():
     # views.postTrend("CC06NGT8S", views.trends())
     # print('This job is run every 30 minute.')
 
-"""@sched.scheduled_job('interval', minutes=1)
+@sched.scheduled_job('interval', minutes=10)
 def timed_job():
     slackBot.api_call(
         "chat.postMessage",
-        channel="CC2DYCHFT",
+        channel="C3BN2BC4",
         text=twittertrends(),
         icon_emoji=':robot_face:'
     )
     # print('This job is run every 30 minute.')
-"""
 
+"""
 @sched.scheduled_job('cron', day_of_week='mon-sun', minutes=10)
 def scheduled_job():
     slackBot.api_call(
@@ -35,5 +35,6 @@ def scheduled_job():
         icon_emoji=':robot_face:'
     )
     # print('This job is run every weekday at 5pm.')
+    """
 
 sched.start()
