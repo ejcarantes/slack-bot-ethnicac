@@ -2,18 +2,8 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from hello import views
 from hello.views import slackBot, twittertrends
 
-sched = BlockingScheduler()
-hostname = "google.com"
-response = os.system("ping -c 1 " + hostname)
 
-@sched.scheduled_job('interval', minutes=15)
-def timed_job():
-    if response == 0:
-        print (hostname+' is up!')
-    else:
-        print (hostname+' is down!')
-    # views.postTrend("CC06NGT8S", views.trends())
-    # print('This job is run every 30 minute.')
+sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=10)
 def timed_job():
