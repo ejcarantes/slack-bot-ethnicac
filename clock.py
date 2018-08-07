@@ -19,7 +19,7 @@ def timed_job():
 def timed_job():
     slackBot.api_call(
         "chat.postMessage",
-        channel="C3BN2BC4",
+        channel="CC3BN2BC4",
         text=twittertrends(),
         icon_emoji=':robot_face:'
     )
