@@ -26,7 +26,7 @@ def timed_job():
     # print('This job is run every 30 minute.')
 """
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=7)
+@sched.scheduled_job('cron', day_of_week='mon-sun', minutes=10)
 def scheduled_job():
     slackBot.api_call(
         "chat.postMessage",
